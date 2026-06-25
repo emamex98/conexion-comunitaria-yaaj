@@ -35,7 +35,7 @@ Como organización líder de Conexión Comunitaria, Yaaj México coordina la imp
 
 ### **Sobre Gilead Sciences**
 
-Conexión Comunitaria es financiado por Gilead Sciences México.
+Conexión Comunitaria es realizado con el apoyo de Gilead Sciences México.
 
 ### **Sobre la red de organizaciones**
 
