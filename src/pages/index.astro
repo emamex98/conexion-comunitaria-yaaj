@@ -1,0 +1,551 @@
+---
+import { Image } from "astro:assets";
+import NumberCount from "../components/NumberCount.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import heroImage from "../assets/imagen1.webp";
+import resultsImage from "../assets/caratula-reporte.webp";
+import YellowButton from "../components/YellowButton.astro";
+
+type NewsEntry = {
+  frontmatter?: {
+    title?: string;
+    description?: string;
+    date?: string | Date;
+    pubDate?: string | Date;
+    image?: string;
+    imageAlt?: string;
+  };
+  rawContent?: () => string;
+};
+
+const stats = [
+  { number: "16", subheader: "estados" },
+  { number: "50+", subheader: "organizaciones aliadas" },
+  { number: "97,540", subheader: "pruebas aplicadas" },
+  { number: "1,716", subheader: "casos reactivos identificados" },
+];
+
+const siteCards = [
+  {
+    title: "Conócenos",
+    text: "Conoce los objetivos del programa y su coordinación.",
+    href: "/conocenos",
+  },
+  {
+    title: "Organizaciones",
+    text: "Conoce a las organizaciones que integran la red.",
+    href: "/organizaciones",
+  },
+  {
+    title: "Resultados",
+    text: "Consulta indicadores, resultados e informes.",
+    href: "/resultados",
+  },
+  {
+    title: "Convocatoria",
+    text: "Participa en futuras oportunidades del proyecto.",
+    href: "/convocatoria",
+  },
+];
+
+const newsModules = import.meta.glob<NewsEntry>("../content/news/*.md", {
+  eager: true,
+});
+
+const toDateValue = (date?: string | Date) => {
+  if (!date) return 0;
+  const parsed = date instanceof Date ? date : new Date(date);
+  return Number.isNaN(parsed.valueOf()) ? 0 : parsed.valueOf();
+};
+
+const formatDate = (date?: string | Date) => {
+  const value = toDateValue(date);
+  if (!value) return undefined;
+
+  return new Intl.DateTimeFormat("es-MX", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  }).format(value);
+};
+
+const createExcerpt = (entry: NewsEntry) =>
+  entry.frontmatter?.description ??
+  entry
+    .rawContent?.()
+    .replace(/^---[\s\S]*?---/, "")
+    .replace(/!\[[^\]]*\]\([^)]+\)/g, "")
+    .replace(/\[[^\]]+\]\([^)]+\)/g, "$1")
+    .replace(/[#*_>`-]/g, "")
+    .replace(/\s+/g, " ")
+    .trim()
+    .slice(0, 150);
+
+const latestNews = Object.entries(newsModules)
+  .map(([path, entry]) => {
+    const title = entry.frontmatter?.title?.trim();
+    const date = entry.frontmatter?.date ?? entry.frontmatter?.pubDate;
+
+    return {
+      title,
+      date,
+      formattedDate: formatDate(date),
+      excerpt: createExcerpt(entry),
+      href: `/noticias/${path.split("/").pop()?.replace(/\.md$/, "")}`,
+    };
+  })
+  .filter((entry) => entry.title && entry.excerpt)
+  .sort((a, b) => toDateValue(b.date) - toDateValue(a.date))
+  .slice(0, 3);
+---
+
+<BaseLayout>
+  <section class="hero-section" aria-label="Conexión Comunitaria">
+    <a class="hero-link" href="/resultados" aria-label="Ver resultados">
+      <Image
+        src={heroImage}
+        alt="Conexión Comunitaria"
+        class="hero-image"
+        loading="eager"
+      />
+    </a>
+  </section>
+
+  <section class="content-section" aria-labelledby="home-results-title">
+    <div class="content-inner">
+      <div class="intro-copy">
+        <h2 id="home-results-title">
+          Conexión Comunitaria:<br /> Juntxs en la Prevención del VIH
+        </h2>
+        <p>
+          Fortalecemos la respuesta comunitaria frente al VIH a través de una
+          red nacional de organizaciones que promueve la prevención, detección
+          oportuna y vinculación efectiva a servicios de salud.
+        </p>
+      </div>
+
+      <div class="stats-grid" aria-label="Resultados principales">
+        {
+          stats.map((stat) => (
+            <div class="stat-column">
+              <NumberCount
+                number={stat.number}
+                subheader={stat.subheader}
+                class="stat-count"
+              />
+            </div>
+          ))
+        }
+      </div>
+
+      <div class="results-feature">
+        <div class="results-copy">
+          <h2>Conoce los resultados de 2025</h2>
+          <p>
+            Descubre los avances, aprendizajes y logros alcanzados por la red
+            nacional de organizaciones participantes durante el último año.
+          </p>
+
+          <YellowButton
+            href="https://drive.google.com/file/d/1FsYuN5faMsngtKXh4OoiQFn22xwhfyuD/view"
+            target="_blank"
+          >
+            Descargar el informe
+          </YellowButton>
+        </div>
+
+        <Image
+          src={resultsImage}
+          alt="Participantes de Conexión Comunitaria"
+          class="results-image"
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="quick-links-section" aria-labelledby="quick-links-title">
+    <div class="section-inner">
+      <div class="section-heading">
+        <h2 id="quick-links-title">Explora la red</h2>
+      </div>
+
+      <div class="link-card-grid">
+        {
+          siteCards.map((card) => (
+            <a class="link-card" href={card.href}>
+              <span>{card.title}</span>
+              <p>{card.text}</p>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="news-section" aria-labelledby="news-title">
+    <div class="section-inner">
+      <div class="section-heading">
+        <h2 id="news-title">Noticias</h2>
+      </div>
+
+      {
+        latestNews.length > 0 ? (
+          <>
+            <div class="news-grid">
+              {latestNews.map((entry) => (
+                <article class="news-card">
+                  {entry.formattedDate && <time>{entry.formattedDate}</time>}
+                  <h3>{entry.title}</h3>
+                  <p>{entry.excerpt}</p>
+                  <a class="news-card-cta" href={entry.href}>
+                    Leer más
+                  </a>
+                </article>
+              ))}
+            </div>
+
+            <div class="news-actions">
+              <YellowButton href="/noticias">
+                Ver todas las noticias
+              </YellowButton>
+            </div>
+          </>
+        ) : (
+          <p class="empty-news">Pronto compartiremos nuevas actualizaciones.</p>
+        )
+      }
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero-section {
+    width: 100%;
+    min-height: clamp(22rem, 42vw, 31rem);
+    overflow: hidden;
+  }
+
+  .hero-link {
+    display: block;
+    min-height: inherit;
+    background: #d7f1ea;
+  }
+
+  .hero-link:focus-visible {
+    outline: 4px solid rgb(30 75 106 / 0.36);
+    outline-offset: -4px;
+  }
+
+  .hero-image {
+    width: 100%;
+    height: clamp(22rem, 42vw, 31rem);
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .content-section {
+    background: var(--white);
+    padding: clamp(3.5rem, 7vw, 6rem) clamp(2rem, 7vw, 6.5rem);
+  }
+
+  .content-inner {
+    display: grid;
+    gap: clamp(2.5rem, 5vw, 4rem);
+    margin: 0 auto;
+    width: min(100%, var(--page-max));
+  }
+
+  .intro-copy {
+    max-width: 60rem;
+  }
+
+  .intro-copy h2 {
+    margin: 0 0 1rem;
+    color: var(--primary-blue);
+    font-size: clamp(2rem, 4vw, 3.35rem);
+    font-weight: 900;
+    line-height: 1.02;
+    letter-spacing: 0;
+  }
+
+  .intro-copy p {
+    max-width: 52rem;
+    margin: 0;
+    color: #263d4d;
+    font-size: clamp(1rem, 1.6vw, 1.2rem);
+    font-weight: 700;
+    line-height: 1.35;
+  }
+
+  .results-feature {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.72fr);
+    align-items: center;
+    gap: clamp(2rem, 5vw, 4rem);
+    border-top: 3px solid var(--accent-yellow);
+    padding-top: clamp(2rem, 4vw, 3rem);
+  }
+
+  .results-copy {
+    max-width: 42rem;
+  }
+
+  .results-copy h2,
+  .section-heading h2 {
+    margin: 0 0 1rem;
+    color: var(--primary-blue);
+    font-size: clamp(2rem, 4vw, 3.35rem);
+    font-weight: 900;
+    line-height: 1.02;
+    letter-spacing: 0;
+  }
+
+  .results-copy p {
+    max-width: 38rem;
+    margin: 0 0 1.5rem;
+    color: #263d4d;
+    font-size: clamp(1rem, 1.6vw, 1.2rem);
+    font-weight: 700;
+    line-height: 1.35;
+  }
+
+  .results-image {
+    width: 100%;
+    height: clamp(20rem, 34vw, 27rem);
+    aspect-ratio: 4 / 3;
+    border-radius: 0.5rem;
+    object-fit: cover;
+    box-shadow: 0 1.25rem 3rem rgb(30 75 106 / 0.12);
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(1rem, 2vw, 1.5rem);
+  }
+
+  .stat-column {
+    display: grid;
+    align-items: start;
+    justify-items: center;
+    min-height: clamp(10rem, 18vw, 13rem);
+    border-top: 3px solid var(--accent-yellow);
+    padding: clamp(1.25rem, 2.5vw, 1.75rem) 0.75rem 0;
+  }
+
+  .stat-column :global(.stat-count) {
+    color: var(--primary-blue);
+    width: 100%;
+  }
+
+  .stat-column :global(.number-count__value) {
+    font-size: clamp(2.55rem, 5.2vw, 4.4rem);
+  }
+
+  .stat-column :global(.number-count__subheader) {
+    max-width: 11rem;
+    font-size: clamp(1rem, 1.45vw, 1.35rem);
+    line-height: 1.05;
+    white-space: normal;
+  }
+
+  .quick-links-section,
+  .news-section {
+    padding: clamp(3.5rem, 7vw, 6rem) clamp(2rem, 7vw, 6.5rem);
+  }
+
+  .quick-links-section {
+    background: var(--primary-green);
+  }
+
+  .news-section {
+    background: var(--white);
+  }
+
+  .section-inner {
+    margin: 0 auto;
+    width: min(100%, var(--page-max));
+  }
+
+  .section-heading {
+    max-width: 42rem;
+    margin-bottom: clamp(1.75rem, 4vw, 2.5rem);
+  }
+
+  .link-card-grid,
+  .news-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(1rem, 2vw, 1.5rem);
+  }
+
+  .link-card-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .link-card,
+  .news-card {
+    display: flex;
+    border: 1px solid rgb(30 75 106 / 0.1);
+    border-radius: 0.5rem;
+    background: var(--white);
+    color: #263d4d;
+    padding: clamp(1.2rem, 2.4vw, 1.5rem);
+    transition:
+      border-color 180ms ease,
+      box-shadow 180ms ease,
+      transform 180ms ease;
+  }
+
+  .link-card {
+    flex-direction: column;
+    gap: 0.9rem;
+    min-height: 10.5rem;
+  }
+
+  .news-card {
+    min-height: 13rem;
+  }
+
+  .link-card span {
+    color: var(--primary-blue);
+    font-size: clamp(1.18rem, 2vw, 1.45rem);
+    font-weight: 900;
+    line-height: 1.08;
+  }
+
+  .link-card p,
+  .news-card p,
+  .empty-news {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.35;
+  }
+
+  .news-card {
+    flex-direction: column;
+    gap: 0.8rem;
+    background: #f8fbfa;
+  }
+
+  .news-card time {
+    color: #557081;
+    font-size: 0.82rem;
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+
+  .news-card h3 {
+    margin: 0;
+    color: var(--primary-blue);
+    font-size: clamp(1.25rem, 2vw, 1.55rem);
+    font-weight: 900;
+    line-height: 1.08;
+  }
+
+  .news-card p {
+    flex: 1;
+  }
+
+  .news-card-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    min-height: 2.45rem;
+    margin-top: 0.25rem;
+    border-radius: 999px;
+    background: var(--accent-yellow);
+    color: #244257;
+    padding: 0.68rem 1.15rem;
+    font-size: 0.82rem;
+    font-weight: 900;
+    line-height: 1;
+    text-align: center;
+    text-transform: uppercase;
+    box-shadow: inset 0 -2px 0 rgb(30 75 106 / 0.12);
+  }
+
+  .news-card-cta:focus-visible,
+  .news-card-cta:hover {
+    background: #ffcf31;
+    outline: 3px solid rgb(30 75 106 / 0.25);
+    outline-offset: 3px;
+  }
+
+  .link-card:focus-visible,
+  .link-card:hover,
+  .news-card:focus-within,
+  .news-card:hover {
+    border-color: rgb(30 75 106 / 0.28);
+    box-shadow: 0 1rem 2.5rem rgb(30 75 106 / 0.12);
+    outline: 0;
+    transform: translateY(-0.2rem);
+  }
+
+  .empty-news {
+    color: #476171;
+  }
+
+  .news-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: clamp(2rem, 4vw, 3rem);
+  }
+
+  @media (max-width: 900px) {
+    .link-card-grid,
+    .news-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 761px) {
+    .hero-section {
+      --header-flow-height: clamp(4.25rem, 7vw, 5.75rem);
+      margin-top: calc(var(--header-flow-height) * -1);
+    }
+  }
+
+  @media (max-width: 760px) {
+    .hero-section,
+    .hero-link,
+    .hero-image {
+      min-height: clamp(19rem, 82vw, 26rem);
+      height: clamp(19rem, 82vw, 26rem);
+    }
+
+    .stats-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .results-feature,
+    .link-card-grid,
+    .news-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .results-feature {
+      gap: 1.6rem;
+    }
+
+    .results-image {
+      height: auto;
+    }
+
+    .link-card,
+    .news-card {
+      min-height: 11rem;
+    }
+
+    .link-card {
+      min-height: 9.5rem;
+    }
+
+    .stat-column :global(.number-count__value) {
+      font-size: clamp(3.4rem, 16vw, 5rem);
+    }
+  }
+</style>

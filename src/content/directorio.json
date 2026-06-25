@@ -1,0 +1,1125 @@
+{
+  "Baja California": [
+    {
+      "nombre": "Centro de Servicios SER A.C.",
+      "email": "informacion@ser.org.mx",
+      "telefono": "664 381 0469",
+      "web": "https://centroser.org/",
+      "rrss": [
+        {
+          "nombre": "Facebook",
+          "usuario": "Centro de Servicios SER A.C.",
+          "url": "https://www.facebook.com/CENTROCSER.AC?locale=es_LA"
+        },
+        {
+          "nombre": "Instagram",
+          "usuario": "@centrodeservicios.ser",
+          "url": "https://www.instagram.com/centrodeservicios.ser/"
+        }
+      ]
+    },
+    {
+      "nombre": "Fronteras Unidas Pro Salud, A.C.",
+      "email": "apineda@pro-salud.org",
+      "telefono": "664 607 1692 ext. 102",
+      "rrss": [
+        {
+          "nombre": "Facebook",
+          "usuario": "Fronteras Unidas Pro Salud, A.C.",
+          "url": "https://www.facebook.com/ClinicaProSaludFlorido"
+        }
+      ]
+    }
+  ],
+  "Chiapas": [
+    {
+      "nombre": "Balún Diverso A.C.",
+      "email": "balundiverso@gmail.com",
+      "telefono": "55 2751 4569",
+      "web": "https://balundiverso.wixsite.com/balun",
+      "rrss": [
+        {
+          "nombre": "Facebook",
+          "usuario": "Balún Diverso AC",
+          "url": "https://www.facebook.com/balundiverso/"
+        },
+        {
+          "nombre": "Instagram",
+          "usuario": "@balundiversoac",
+          "url": "https://www.instagram.com/balundiversoac/"
+        },
+        {
+          "nombre": "X",
+          "usuario": "@BalunDiverso",
+          "url": "https://x.com/BalunDiverso"
+        }
+      ]
+    },
+    {
+      "nombre": "Medical IMPACT",
+      "email": "medicalimpactmx@gmail.com",
+      "telefono": "55 3674 8575",
+      "rrss": [
+        {
+          "nombre": "Facebook",
+          "usuario": "Medical Impact",
+          "url": "https://www.facebook.com/Medical.Impact"
+        },
+        {
+          "nombre": "Instagram",
+          "usuario": "@medical.impact",
+          "url": "https://www.instagram.com/medical.impact/"
+        },
+        {
+          "nombre": "X",
+          "usuario": "@Medical__IMPACT",
+          "url": "https://x.com/Medical__IMPACT"
+        },
+        {
+          "nombre": "YouTube",
+          "usuario": "Medical IMPACT",
+          "url": "https://www.youtube.com/@medical.impact"
+        }
+      ]
+    },
+    {
+      "nombre": "RED VIVE LIBRE",
+      "email": "info@redvivelibre.mx",
+      "telefono": "961 942 1932",
+      "rrss": [
+        {
+          "nombre": "Facebook",
+          "usuario": "Colectiva Red Vive Libre",
+          "url": "https://www.facebook.com/RedViveLibre"
+        },
+        {
+          "nombre": "Instagram",
+          "usuario": "@redvivelibre",
+          "url": "https://www.instagram.com/redvivelibre/"
+        },
+        {
+          "nombre": "X",
+          "usuario": "@RedViveLibre",
+          "url": "https://x.com/RedViveLibre"
+        }
+      ]
+    },
+    {
+      "nombre": "Una Mano Amiga en la Lucha contra el Sida A.C.",
+      "email": "unamano_amiga@umalcs.org",
+      "rrss": [
+        {
+          "nombre": "Facebook",
+          "usuario": "Una Mano Amiga en la lucha contra el SIDA A.C.",
+          "url": "https://www.facebook.com/UMALCS"
+        },
+        {
+          "nombre": "Instagram",
+          "usuario": "@umalcs",
+          "url": "https://www.instagram.com/umalcs/"
+        },
+        {
+          "nombre": "X",
+          "usuario": "@UMALCSmx",
+          "url": "https://x.com/UMALCSmx"
+        },
+        {
+          "nombre": "YouTube",
+          "usuario": "UNAMANO AMIGA",
+          "url": "https://www.youtube.com/@unamanoamiga6205"
+        }
+      ]
+    }
+  ],
+  "Chihuahua": [
+    {
+      "nombre": "Aliados en Movimiento por la Diversidad A.C.",
+      "email": "pares.aliados@gmail.com",
+      "telefono": "614 599 8042",
+      "web": "https://www.aliadosenmovimientoporladiversidad.org.mx/",
+      "rrss": [
+        {
+          "nombre": "Facebook",
+          "usuario": "Aliados en Movimiento por la Diversidad",
+          "url": "https://www.facebook.com/profile.php?id=100092504120483"
+        },
+        {
+          "nombre": "Instagram",
+          "usuario": "@aliados.en.movimiento",
+          "url": "https://www.instagram.com/aliados.en.movimiento"
+        }
+      ]
+    },
+    {
+      "nombre": "Fátima I.B.P.",
+      "email": "fatimaibpcuu@gmail.com",
+      "telefono": "(614) 418 8880",
+      "rrss": [
+        {
+          "nombre": "Facebook",
+          "usuario": "Fátima IBP",
+          "url": "https://www.facebook.com/fatimaibpchihuahua"
+        },
+        {
+          "nombre": "Instagram",
+          "usuario": "@fatimaibpchih",
+          "url": "https://www.instagram.com/fatimaibpchih/"
+        }
+      ]
+    }
+  ],
+  "CDMX": [
+    {
+      "nombre": "Almas cautivas A.C.",
+      "ubicacion": "Ciudad de México",
+      "email": "almas.cautivas.ac@gmail.com",
+      "telefono": "720 448 5112",
+      "web": "https://almascautivasorg.wordpress.com",
+      "rrss": [
+        {
+          "nombre": "Facebook",
+          "usuario": "Almas Cautivas A. C.",
+          "url": "https://www.facebook.com/almascautivasac"
+        },
+        {
+          "nombre": "Instagram",
+          "usuario": "@almas.cautivas",
+          "url": "https://www.instagram.com/almas.cautivas/"
+        }
+      ]
+    },
+    {
+      "nombre": "Fundación Unidos por un México Vivo A.C.",
+      "email": "fundacion@mexicovivo.org",
+      "rrss": [
+        {
+          "nombre": "Facebook",
+          "usuario": "Fundación México Vivo",
+          "url": "https://www.facebook.com/fundacion.mexico.vivo"
+        },
+        {
+          "nombre": "Instagram",
+          "usuario": "@fundacion_mexico_vivo",
+          "url": "https://www.instagram.com/fundacion_mexico_vivo/"
+        },
+        {
+          "nombre": "X",
+          "usuario": "@fundmexicovivo",
+          "url": "https://x.com/fundmexicovivo"
+        }
+      ]
+    },
+    {
+      "nombre": "GP Diversidad Sexual Peñitas",
+      "email": "veronnikayepez@gmail.com",
+      "rrss": [
+        {
+          "nombre": "Facebook",
+          "usuario": "grupo de Diversidad sexual Peñitas,Atizapán de Zaragoza",
+          "url": "https://www.facebook.com/groups/727041921456650"
+        },
+        {
+          "nombre": "Instagram",
+          "usuario": "@gpdiversidadsp",
+          "url": "https://www.instagram.com/gpdiversidadsp/"
+        }
+      ]
+    },
+    {
+      "nombre": "Interculturalidad, Salud y Derechos A.C. (INSADE)",
+      "email": "insadeac@gmail.com",
+      "telefono": "55 3038 1756",
+      "rrss": [
+        {
+          "nombre": "Facebook",
+          "usuario": "Interculturalidad, Salud y Derechos A.C. - INSADE",
+          "url": "https://www.facebook.com/insade.ac"
+        },
+        {
+          "nombre": "Instagram",
+          "usuario": "@insade_ac",
+          "url": "https://www.instagram.com/insade_ac/"
+        },
+        {
+          "nombre": "X",
+          "usuario": "@insade_ac",
+          "url": "https://x.com/insade_ac"
+        },
+        {
+          "nombre": "YouTube",
+          "usuario": "Interculturalidad, Salud y Derechos A.C.",
+          "url": "https://www.youtube.com/@insade_ac"
+        }
+      ]
+    },
+    {
+      "nombre": "Medical IMPACT",
+      "email": "medicalimpactmx@gmail.com",
+      "telefono": "55 3674 8575",
+      "rrss": [
+        {
+          "nombre": "Facebook",
+          "usuario": "Medical Impact",
+          "url": "https://www.facebook.com/Medical.Impact"
+        },
+        {
+          "nombre": "Instagram",
+          "usuario": "@medical.impact",
+          "url": "https://www.instagram.com/medical.impact/"
+        },
+        {
+          "nombre": "X",
+          "usuario": "@Medical__IMPACT",
+          "url": "https://x.com/Medical__IMPACT"
+        },
+        {
+          "nombre": "YouTube",
+          "usuario": "Medical IMPACT",
+          "url": "https://www.youtube.com/@medical.impact"
+        }
+      ]
+    },
+    {
+      "nombre": "PETIT FILS A.C.",
+      "rrss": [
+        {
+          "nombre": "Facebook",
+          "usuario": "Fundación Petit Fils México A.C.",
+          "url": "https://www.facebook.com/Petitfilsmexico"
+        },
+        {
+          "nombre": "Instagram",
+          "usuario": "@petitfilsmexico",
+          "url": "https://www.instagram.com/petitfilsmexico/"
+        },
+        {
+          "nombre": "X",
+          "usuario": "@FilsMexico",
+          "url": "https://x.com/FilsMexico"
+        },
+        {
+          "nombre": "YouTube",
+          "usuario": "Petit Fils A.C.",
+          "url": "https://www.youtube.com/@petitfilsa.c.4359"
+        }
+      ]
+    },
+    {
+      "nombre": "Red de Profesionales de la Salud VIH A.C. (PROSAVIH)",
+      "email": "prosavih@gmail.com",
+      "telefono": "55 5514 2248",
+      "rrss": [
+        {
+          "nombre": "Facebook",
+          "usuario": "Prosavih México",
+          "url": "https://www.facebook.com/profile.php?id=100086471355715"
+        },
+        {
+          "nombre": "Instagram",
+          "usuario": "@prosavih",
+          "url": "https://www.instagram.com/prosavih/"
+        },
+        {
+          "nombre": "X",
+          "usuario": "@Prosavih",
+          "url": "https://x.com/Prosavih"
+        }
+      ]
+    },
+    {
+      "nombre": "Servicios de Inclusión Integral y Derechos Humanos A.C. (SEIINAC)",
+      "email": "contacto@seiinac.org.mx",
+      "telefono": "771 719 2507",
+      "rrss": [
+        {
+          "nombre": "Facebook",
+          "usuario": "Seiinac",
+          "url": "https://www.facebook.com/seiinac"
+        },
+        {
+          "nombre": "Instagram",
+          "usuario": "@seiinac",
+          "url": "https://www.instagram.com/seiinac/"
+        },
+        {
+          "nombre": "X",
+          "usuario": "@SEIINAC",
+          "url": "https://x.com/SEIINAC"
+        },
+        {
+          "nombre": "YouTube",
+          "usuario": "SEIINAC",
+          "url": "https://www.youtube.com/@seiinac4307"
+        }
+      ]
+    }
+  ],
+  "Estado de México": [
+    {
+      "nombre": "Almas cautivas A.C.",
+      "email": "almas.cautivas.ac@gmail.com",
+      "telefono": "720 448 5112",
+      "web": "https://almascautivasorg.wordpress.com",
+      "rrss": [
+        {
+          "nombre": "Facebook",
+          "usuario": "Almas Cautivas A. C.",
+          "url": "https://www.facebook.com/almascautivasac"
+        },
+        {
+          "nombre": "Instagram",
+          "usuario": "@almas.cautivas",
+          "url": "https://www.instagram.com/almas.cautivas/"
+        }
+      ]
+    },
+    {
+      "nombre": "Fuera del Clóset A.C.",
+      "email": "radiofueradelcloset@gmail.com",
+      "telefono": "722 605 5743",
+      "rrss": [
+        {
+          "nombre": "Facebook",
+          "usuario": "Fuera Del Closet",
+          "url": "https://www.facebook.com/fueradelclosetradio"
+        },
+        {
+          "nombre": "Instagram",
+          "usuario": "@fueracloset_ac",
+          "url": "https://www.instagram.com/fueracloset_ac/"
+        },
+        {
+          "nombre": "X",
+          "usuario": "@FueraCloset_AC",
+          "url": "https://x.com/FueraCloset_AC"
+        }
+      ]
+    },
+    {
+      "nombre": "Interculturalidad, Salud y Derechos A.C. (INSADE)",
+      "email": "insadeac@gmail.com",
+      "telefono": "55 3038 1756",
+      "rrss": [
+        {
+          "nombre": "Facebook",
+          "usuario": "Interculturalidad, Salud y Derechos A.C. - INSADE",
+          "url": "https://www.facebook.com/insade.ac"
+        },
+        {
+          "nombre": "Instagram",
+          "usuario": "@insade_ac",
+          "url": "https://www.instagram.com/insade_ac/"
+        },
+        {
+          "nombre": "X",
+          "usuario": "@insade_ac",
+          "url": "https://x.com/insade_ac"
+        },
+        {
+          "nombre": "YouTube",
+          "usuario": "Interculturalidad, Salud y Derechos A.C.",
+          "url": "https://www.youtube.com/@insade_ac"
+        }
+      ]
+    },
+    {
+      "nombre": "Medical IMPACT",
+      "email": "medicalimpactmx@gmail.com",
+      "telefono": "55 3674 8575",
+      "rrss": [
+        {
+          "nombre": "Facebook",
+          "usuario": "Medical Impact",
+          "url": "https://www.facebook.com/Medical.Impact"
+        },
+        {
+          "nombre": "Instagram",
+          "usuario": "@medical.impact",
+          "url": "https://www.instagram.com/medical.impact/"
+        },
+        {
+          "nombre": "X",
+          "usuario": "@Medical__IMPACT",
+          "url": "https://x.com/Medical__IMPACT"
+        },
+        {
+          "nombre": "YouTube",
+          "usuario": "Medical IMPACT",
+          "url": "https://www.youtube.com/@medical.impact"
+        }
+      ]
+    },
+    {
+      "nombre": "Servicios de Inclusión Integral y Derechos Humanos A.C. (SEIINAC)",
+      "email": "contacto@seiinac.org.mx",
+      "telefono": "771 719 2507",
+      "rrss": [
+        {
+          "nombre": "Facebook",
+          "usuario": "Seiinac",
+          "url": "https://www.facebook.com/seiinac"
+        },
+        {
+          "nombre": "Instagram",
+          "usuario": "@seiinac",
+          "url": "https://www.instagram.com/seiinac/"
+        },
+        {
+          "nombre": "X",
+          "usuario": "@SEIINAC",
+          "url": "https://x.com/SEIINAC"
+        },
+        {
+          "nombre": "YouTube",
+          "usuario": "SEIINAC",
+          "url": "https://www.youtube.com/@seiinac4307"
+        }
+      ]
+    },
+    {
+      "nombre": "Vivir – Participación, Incidencia y Transparencia, A.C.",
+      "email": "franciscorosasanchez@gmail.com",
+      "telefono": "55 1367 0439",
+      "rrss": [
+        {
+          "nombre": "Facebook",
+          "usuario": "Vivir Participación, Incidencia y Transparencia, A.C.",
+          "url": "https://www.facebook.com/VivirParticipacionIncidenciaTransparencia"
+        },
+        {
+          "nombre": "Instagram",
+          "usuario": "@vivirparticipa_",
+          "url": "https://www.instagram.com/vivirparticipa_"
+        },
+        {
+          "nombre": "X",
+          "usuario": "@VivirIncidencia",
+          "url": "https://x.com/VivirIncidencia"
+        },
+        {
+          "nombre": "YouTube",
+          "usuario": "Vivir. Participación, Incidencia y Transparencia",
+          "url": "https://www.youtube.com/@vivir.participacioninciden4112"
+        }
+      ]
+    }
+  ],
+  "Guanajuato": [
+    {
+      "nombre": "Casa de las Muñecas Tiresias A.C.",
+      "email": "core.camtac.guanajuato@gmail.com",
+      "telefono": "462 660 0700",
+      "rrss": [
+        {
+          "nombre": "Facebook",
+          "usuario": "Casa de las Muñecas Tiresias A.C. Guanajuato",
+          "url": "https://www.facebook.com/profile.php?id=61556779775548"
+        },
+        {
+          "nombre": "Instagram",
+          "usuario": "@camtacgto",
+          "url": "https://www.instagram.com/camtacgto/"
+        }
+      ]
+    },
+    {
+      "nombre": "Colectivo Seres, A.C.",
+      "email": "contacto@colectivoseres.org",
+      "telefono": "473 6904626",
+      "web": "https://colectivoseres.org/",
+      "rrss": [
+        {
+          "nombre": "Facebook",
+          "usuario": "Colectivo Seres",
+          "url": "https://www.facebook.com/colectivo.seres"
+        },
+        {
+          "nombre": "Instagram",
+          "usuario": "@colectivoseresac",
+          "url": "https://www.instagram.com/colectivoseresac/"
+        },
+        {
+          "nombre": "X",
+          "usuario": "@ColectivoSeres",
+          "url": "https://x.com/ColectivoSeres"
+        }
+      ]
+    },
+    {
+      "nombre": "Medical IMPACT",
+      "email": "medicalimpactmx@gmail.com",
+      "telefono": "55 3674 8575",
+      "rrss": [
+        {
+          "nombre": "Facebook",
+          "usuario": "Medical Impact",
+          "url": "https://www.facebook.com/Medical.Impact"
+        },
+        {
+          "nombre": "Instagram",
+          "usuario": "@medical.impact",
+          "url": "https://www.instagram.com/medical.impact/"
+        },
+        {
+          "nombre": "X",
+          "usuario": "@Medical__IMPACT",
+          "url": "https://x.com/Medical__IMPACT"
+        },
+        {
+          "nombre": "YouTube",
+          "usuario": "Medical IMPACT",
+          "url": "https://www.youtube.com/@medical.impact"
+        }
+      ]
+    }
+  ],
+  "Guerrero": [
+    {
+      "nombre": "Casa de las Muñecas Tiresias A.C.",
+      "rrss": [
+        {
+          "nombre": "Facebook",
+          "usuario": "Casa de las Muñecas Tiresias A.C. Nayarit",
+          "url": "https://www.facebook.com/CAMTAC.NAY"
+        },
+        {
+          "nombre": "Instagram",
+          "usuario": "@camtacnay",
+          "url": "https://www.instagram.com/camtacnay/"
+        }
+      ]
+    }
+  ],
+  "Hidalgo": [
+    {
+      "nombre": "Medical IMPACT",
+      "email": "medicalimpactmx@gmail.com",
+      "telefono": "55 3674 8575",
+      "rrss": [
+        {
+          "nombre": "Facebook",
+          "usuario": "Medical Impact",
+          "url": "https://www.facebook.com/Medical.Impact"
+        },
+        {
+          "nombre": "Instagram",
+          "usuario": "@medical.impact",
+          "url": "https://www.instagram.com/medical.impact/"
+        },
+        {
+          "nombre": "X",
+          "usuario": "@Medical__IMPACT",
+          "url": "https://x.com/Medical__IMPACT"
+        },
+        {
+          "nombre": "YouTube",
+          "usuario": "Medical IMPACT",
+          "url": "https://www.youtube.com/@medical.impact"
+        }
+      ]
+    },
+    {
+      "nombre": "Servicios de Inclusión Integral y Derechos Humanos A.C. (SEIINAC)",
+      "email": "contacto@seiinac.org.mx",
+      "telefono": "771 719 2507",
+      "rrss": [
+        {
+          "nombre": "Facebook",
+          "usuario": "Seiinac",
+          "url": "https://www.facebook.com/seiinac"
+        },
+        {
+          "nombre": "Instagram",
+          "usuario": "@seiinac",
+          "url": "https://www.instagram.com/seiinac/"
+        },
+        {
+          "nombre": "X",
+          "usuario": "@SEIINAC",
+          "url": "https://x.com/SEIINAC"
+        },
+        {
+          "nombre": "YouTube",
+          "usuario": "SEIINAC",
+          "url": "https://www.youtube.com/@seiinac4307"
+        }
+      ]
+    }
+  ],
+  "Jalisco": [
+    {
+      "nombre": "Colectivo Zapotlán VIHVO A.C.",
+      "ubicacion": "Ciudad Guzmán",
+      "email": "vihvoac@gmail.com",
+      "telefono": "341 413 1787",
+      "web": "https://www.zapotlanvihvo.org/",
+      "rrss": [
+        {
+          "nombre": "Facebook",
+          "usuario": "Zapotlán VIHVO A. C.",
+          "url": "https://www.facebook.com/ZapotlanVIHVO"
+        },
+        {
+          "nombre": "Instagram",
+          "usuario": "@zapotlanvihvo",
+          "url": "https://www.instagram.com/zapotlanvihvo/"
+        },
+        {
+          "nombre": "X",
+          "usuario": "@ZapotlanVIHVO",
+          "url": "https://x.com/ZapotlanVIHVO"
+        }
+      ]
+    },
+    {
+      "nombre": "Mesón de la Misericordia Divina A.C.",
+      "telefono": "333 613 1918 / 332 181 3712 (WhatsApp)",
+      "rrss": [
+        {
+          "nombre": "Facebook",
+          "usuario": "Mesón A.C.",
+          "url": "https://www.facebook.com/MesonAC"
+        },
+        {
+          "nombre": "Instagram",
+          "usuario": "@elmesonac",
+          "url": "https://www.instagram.com/elmesonac/"
+        },
+        {
+          "nombre": "YouTube",
+          "usuario": "Mesón AC",
+          "url": "https://www.youtube.com/@mesonac7446"
+        }
+      ]
+    }
+  ],
+  "Nayarit": [
+    {
+      "nombre": "Casa de las Muñecas Tiresias A.C.",
+      "email": "camtac.nayarit@gmail.com",
+      "telefono": "311 281 6843",
+      "rrss": [
+        {
+          "nombre": "Facebook",
+          "usuario": "Casa de las Muñecas Tiresias A.C. Nayarit",
+          "url": "https://www.facebook.com/CAMTAC.NAY"
+        },
+        {
+          "nombre": "Instagram",
+          "usuario": "@camtacnay",
+          "url": "https://www.instagram.com/camtacnay/"
+        }
+      ]
+    },
+    {
+      "nombre": "REDsistencias Disidentes",
+      "telefono": "5661589788",
+      "rrss": [
+        {
+          "nombre": "Facebook",
+          "usuario": "REDsistencia",
+          "url": "fb.com/red.sistencias"
+        },
+        {
+          "nombre": "Instagram",
+          "usuario": "@red.sistencias",
+          "url": "instagram.com/red.sistencias"
+        }
+      ]
+    }
+  ],
+  "Oaxaca": [
+    {
+      "nombre": "Medical IMPACT",
+      "email": "medicalimpactmx@gmail.com",
+      "telefono": "55 3674 8575",
+      "rrss": [
+        {
+          "nombre": "Facebook",
+          "usuario": "Medical Impact",
+          "url": "https://www.facebook.com/Medical.Impact"
+        },
+        {
+          "nombre": "Instagram",
+          "usuario": "@medical.impact",
+          "url": "https://www.instagram.com/medical.impact/"
+        },
+        {
+          "nombre": "X",
+          "usuario": "@Medical__IMPACT",
+          "url": "https://x.com/Medical__IMPACT"
+        },
+        {
+          "nombre": "YouTube",
+          "usuario": "Medical IMPACT",
+          "url": "https://www.youtube.com/@medical.impact"
+        }
+      ]
+    },
+    {
+      "nombre": "Movimiento Organizado Esperanza Social / Red Oaxaqueña por el VIH",
+      "telefono": "951 447 8018",
+      "rrss": [
+        {
+          "nombre": "Facebook",
+          "usuario": "Red Oaxaqueña por el VIH",
+          "url": "https://www.facebook.com/RedOaxaquenaporelVIH"
+        },
+        {
+          "nombre": "Instagram",
+          "usuario": "@redoaxaquenaporelvih",
+          "url": "https://www.instagram.com/redoaxaquenaporelvih/"
+        },
+        {
+          "nombre": "X",
+          "usuario": "@redoaxporelVIH",
+          "url": "https://x.com/redoaxporelVIH"
+        },
+        {
+          "nombre": "YouTube",
+          "usuario": "Red Oaxaqueña Por el VIH",
+          "url": "https://www.youtube.com/@redoaxaquenaporelvih2208"
+        }
+      ]
+    },
+    {
+      "nombre": "Servicios de Inclusión Integral y Derechos Humanos A.C. (SEIINAC)",
+      "email": "contacto@seiinac.org.mx",
+      "telefono": "771 719 2507",
+      "rrss": [
+        {
+          "nombre": "Facebook",
+          "usuario": "Seiinac",
+          "url": "https://www.facebook.com/seiinac"
+        },
+        {
+          "nombre": "Instagram",
+          "usuario": "@seiinac",
+          "url": "https://www.instagram.com/seiinac/"
+        },
+        {
+          "nombre": "X",
+          "usuario": "@SEIINAC",
+          "url": "https://x.com/SEIINAC"
+        },
+        {
+          "nombre": "YouTube",
+          "usuario": "SEIINAC",
+          "url": "https://www.youtube.com/@seiinac4307"
+        }
+      ]
+    }
+  ],
+  "Puebla": [
+    {
+      "nombre": "Colectivo Piensa en Positivo, LUDA, A.C.",
+      "telefono": "800 890 1382",
+      "web": "https://piensaenpositivo.org/",
+      "rrss": [
+        {
+          "nombre": "Instagram",
+          "usuario": "@colectivo_piensa_en_positivo",
+          "url": "https://www.instagram.com/colectivo_piensa_en_positivo"
+        }
+      ]
+    },
+    {
+      "nombre": "Medical IMPACT",
+      "email": "medicalimpactmx@gmail.com",
+      "telefono": "55 3674 8575",
+      "rrss": [
+        {
+          "nombre": "Facebook",
+          "usuario": "Medical Impact",
+          "url": "https://www.facebook.com/Medical.Impact"
+        },
+        {
+          "nombre": "Instagram",
+          "usuario": "@medical.impact",
+          "url": "https://www.instagram.com/medical.impact/"
+        },
+        {
+          "nombre": "X",
+          "usuario": "@Medical__IMPACT",
+          "url": "https://x.com/Medical__IMPACT"
+        },
+        {
+          "nombre": "YouTube",
+          "usuario": "Medical IMPACT",
+          "url": "https://www.youtube.com/@medical.impact"
+        }
+      ]
+    }
+  ],
+  "Quintana Roo": [
+    {
+      "nombre": "Red + Posithiva de Quintana Roo",
+      "telefono": "998 251 8233 / 998 116 4116",
+      "rrss": [
+        {
+          "nombre": "Facebook",
+          "usuario": "Redpositiva Quintanaroo",
+          "url": "https://www.facebook.com/redposithiva.quintanaroo"
+        },
+        {
+          "nombre": "Instagram",
+          "usuario": "@redpositivaoficial",
+          "url": "https://www.instagram.com/redpositivaoficial/"
+        },
+        {
+          "nombre": "X",
+          "usuario": "@redpositivacun",
+          "url": "https://x.com/redpositivacun"
+        }
+      ]
+    }
+  ],
+  "Tabasco": [
+    {
+      "nombre": "Casa de las Muñecas Tiresias A.C.",
+      "telefono": "55 8169 4512",
+      "rrss": [
+        {
+          "nombre": "Facebook",
+          "usuario": "Casa de las Muñecas Tiresias A.C. Tabasco",
+          "url": "https://www.facebook.com/p/Casa-de-las-Mu%C3%B1ecas-Tiresias-AC-Tabasco-100082266324146/"
+        },
+        {
+          "nombre": "Instagram",
+          "usuario": "@camtactab",
+          "url": "https://www.instagram.com/camtactab/"
+        }
+      ]
+    },
+    {
+      "nombre": "Ríos de Vida Cintla A.C.",
+      "email": "anukita88@gmail.com",
+      "rrss": [
+        {
+          "nombre": "Facebook",
+          "usuario": "Rios De Vida Cintla AC",
+          "url": "https://www.facebook.com/rios.de.vida.cintla.ac"
+        },
+        {
+          "nombre": "Instagram",
+          "usuario": "@alejandrohernandez2296",
+          "url": "https://www.instagram.com/alejandrohernandez2296/"
+        },
+        {
+          "nombre": "YouTube",
+          "usuario": "RIOS DE VIDA CINTLA AC",
+          "url": "https://www.youtube.com/@RIOSDEVIDACINTLAAC"
+        }
+      ]
+    }
+  ],
+  "Tamaulipas": [
+    {
+      "nombre": "Club Rotario Reynosa 76",
+      "email": "crreynosa76@gmail.com",
+      "telefono": "899 545 1733",
+      "web": "https://reynosa76.rotaryc.org/",
+      "rrss": [
+        {
+          "nombre": "Facebook",
+          "usuario": "Club Rotario Reynosa 76 A.C.",
+          "url": "https://www.facebook.com/rotario.reynosa.76?locale=es_LA"
+        },
+        {
+          "nombre": "Instagram",
+          "usuario": "@clubrotarioreynosa76",
+          "url": "https://www.instagram.com/clubrotarioreynosa76/"
+        }
+      ]
+    }
+  ],
+  "Veracruz": [
+    {
+      "nombre": "Almas cautivas A.C.",
+      "email": "almas.cautivas.ac@gmail.com",
+      "telefono": "720 448 5112",
+      "web": "https://almascautivasorg.wordpress.com",
+      "rrss": [
+        {
+          "nombre": "Facebook",
+          "usuario": "Almas Cautivas A. C.",
+          "url": "https://www.facebook.com/almascautivasac"
+        },
+        {
+          "nombre": "Instagram",
+          "usuario": "@almas.cautivas",
+          "url": "https://www.instagram.com/almas.cautivas/"
+        }
+      ]
+    },
+    {
+      "nombre": "Comunidad de Apoyo, Salud y Amor de Veracruz",
+      "email": "casavermex@gmail.com",
+      "telefono": "229 207 7113",
+      "rrss": [
+        {
+          "nombre": "Facebook",
+          "usuario": "Casavermx",
+          "url": "https://web.facebook.com/casavermex"
+        },
+        {
+          "nombre": "Instagram",
+          "usuario": "@casavermx",
+          "url": "https://www.instagram.com/casavermx/"
+        },
+        {
+          "nombre": "X",
+          "usuario": "@CASAVERMX",
+          "url": "https://x.com/CASAVERMX"
+        }
+      ]
+    },
+    {
+      "nombre": "Fundación Presmanes Jiménez Díaz A.C.",
+      "email": "fundacionpresmanes@gmail.com",
+      "telefono": "229 931 3145",
+      "rrss": [
+        {
+          "nombre": "Facebook",
+          "usuario": "Fundación Presmanes Jiménez Díaz A.C.",
+          "url": "https://www.facebook.com/FundacionPresmanesJimenezDiaz"
+        },
+        {
+          "nombre": "Instagram",
+          "usuario": "@fundacionpresmanes.xalapa",
+          "url": "https://www.instagram.com/fundacionpresmanes.xalapa/"
+        },
+        {
+          "nombre": "X",
+          "usuario": "@fundacionpresma",
+          "url": "https://x.com/fundacionpresma"
+        }
+      ]
+    },
+    {
+      "nombre": "Medical IMPACT",
+      "email": "medicalimpactmx@gmail.com",
+      "telefono": "55 3674 8575",
+      "rrss": [
+        {
+          "nombre": "Facebook",
+          "usuario": "Medical Impact",
+          "url": "https://www.facebook.com/Medical.Impact"
+        },
+        {
+          "nombre": "Instagram",
+          "usuario": "@medical.impact",
+          "url": "https://www.instagram.com/medical.impact/"
+        },
+        {
+          "nombre": "X",
+          "usuario": "@Medical__IMPACT",
+          "url": "https://x.com/Medical__IMPACT"
+        },
+        {
+          "nombre": "YouTube",
+          "usuario": "Medical IMPACT",
+          "url": "https://www.youtube.com/@medical.impact"
+        }
+      ]
+    }
+  ],
+  "Yucatán": [
+    {
+      "nombre": "Alter Int. de la Península de Yucatán",
+      "email": "alterint.ac@gmail.com",
+      "telefono": "999 948 1126",
+      "web": "https://alterint.org/",
+      "rrss": [
+        {
+          "nombre": "Facebook",
+          "usuario": "Alter-Int",
+          "url": "https://www.facebook.com/alterintyucatan/?locale=es_LA"
+        },
+        {
+          "nombre": "Instagram",
+          "usuario": "@alterint_asociacion",
+          "url": "https://www.instagram.com/alterint_asociacion/"
+        },
+        {
+          "nombre": "YouTube",
+          "usuario": "Alterativa yucateca integral para el desarollo",
+          "url": "https://www.youtube.com/user/AlterInt"
+        }
+      ]
+    },
+    {
+      "nombre": "Colectivo S3D A.C.",
+      "email": "colectivos3d@gmail.com",
+      "telefono": "999 357 7408",
+      "rrss": [
+        {
+          "nombre": "Facebook",
+          "usuario": "Colectivo S3D",
+          "url": "https://www.facebook.com/profile.php?id=100066753627170&locale=es_LA"
+        },
+        {
+          "nombre": "Instagram",
+          "usuario": "@colectivo_s3d",
+          "url": "https://www.instagram.com/colectivo_s3d/"
+        }
+      ]
+    },
+    {
+      "nombre": "Fundación BAI A.C.",
+      "email": "info@fundacionbai.mx",
+      "telefono": "999 923 4689",
+      "rrss": [
+        {
+          "nombre": "Facebook",
+          "usuario": "Fundación BAI A.C.",
+          "url": "https://www.facebook.com/fundacionbai"
+        },
+        {
+          "nombre": "Instagram",
+          "usuario": "@fundacionbai",
+          "url": "https://www.instagram.com/fundacionbai/"
+        },
+        {
+          "nombre": "X",
+          "usuario": "@Fundacion_BAI",
+          "url": "https://x.com/Fundacion_BAI"
+        },
+        {
+          "nombre": "YouTube",
+          "usuario": "Fundación BAI",
+          "url": "https://www.youtube.com/@fundacionbai9938"
+        }
+      ]
+    }
+  ],
+  "Zacatecas": [
+    {
+      "nombre": "Medical IMPACT",
+      "email": "medicalimpactmx@gmail.com",
+      "telefono": "55 3674 8575",
+      "rrss": [
+        {
+          "nombre": "Facebook",
+          "usuario": "Medical Impact",
+          "url": "https://www.facebook.com/Medical.Impact"
+        },
+        {
+          "nombre": "Instagram",
+          "usuario": "@medical.impact",
+          "url": "https://www.instagram.com/medical.impact/"
+        },
+        {
+          "nombre": "X",
+          "usuario": "@Medical__IMPACT",
+          "url": "https://x.com/Medical__IMPACT"
+        },
+        {
+          "nombre": "YouTube",
+          "usuario": "Medical IMPACT",
+          "url": "https://www.youtube.com/@medical.impact"
+        }
+      ]
+    }
+  ]
+}

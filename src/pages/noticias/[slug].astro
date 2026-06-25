@@ -1,0 +1,193 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+type NewsPage = {
+  default: any;
+  rawContent?: () => string;
+  frontmatter: {
+    title?: string;
+    description?: string;
+    date?: string | Date;
+    pubDate?: string | Date;
+  };
+};
+
+export function getStaticPaths() {
+  const newsPages = import.meta.glob<NewsPage>("../../content/news/*.md", {
+    eager: true,
+  });
+
+  return Object.entries(newsPages)
+    .filter(([, page]) => page.frontmatter.title)
+    .map(([path, page]) => {
+      const slug = path.split("/").pop()?.replace(/\.md$/, "");
+
+      return {
+        params: { slug },
+        props: { page },
+      };
+    });
+}
+
+const { page } = Astro.props;
+const Content = page.default;
+const {
+  title = "Noticias",
+  description = "Noticias de Conexión Comunitaria.",
+  date,
+  pubDate,
+} = page.frontmatter;
+
+const publishedDate = date ?? pubDate;
+const formattedDate = publishedDate
+  ? new Intl.DateTimeFormat("es-MX", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    }).format(new Date(publishedDate))
+  : undefined;
+---
+
+<BaseLayout title={title} description={description}>
+  <section class="news-hero" aria-labelledby="news-title">
+    <div class="hero-inner">
+      {formattedDate && <time>{formattedDate}</time>}
+      <h1 id="news-title">{title}</h1>
+      {description && <p>{description}</p>}
+    </div>
+  </section>
+
+  <section class="content-section" aria-label="Contenido de noticia">
+    <article class="markdown-content">
+      <Content />
+    </article>
+  </section>
+</BaseLayout>
+
+<style>
+  .news-hero {
+    background: var(--primary-green);
+    margin-top: calc(clamp(4.25rem, 7vw, 5.75rem) * -1);
+    padding: calc(clamp(8rem, 14vw, 11rem) + clamp(4.25rem, 7vw, 5.75rem))
+      var(--gutter) clamp(3rem, 7vw, 5rem);
+  }
+
+  .hero-inner,
+  .markdown-content {
+    margin: 0 auto;
+    width: min(100%, 56rem);
+  }
+
+  time {
+    display: block;
+    margin-bottom: 1rem;
+    color: #557081;
+    font-size: 0.86rem;
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+
+  h1 {
+    max-width: 13ch;
+    margin: 0;
+    color: var(--primary-blue);
+    font-size: clamp(2.6rem, 6vw, 4.6rem);
+    font-weight: 900;
+    line-height: 1.02;
+    letter-spacing: 0;
+  }
+
+  .hero-inner p {
+    max-width: 42rem;
+    margin: 1.25rem 0 0;
+    color: #263d4d;
+    font-size: clamp(1rem, 1.6vw, 1.2rem);
+    font-weight: 700;
+    line-height: 1.35;
+  }
+
+  .content-section {
+    background: var(--white);
+    padding: clamp(3.5rem, 7vw, 6rem) var(--gutter);
+  }
+
+  .markdown-content {
+    color: #243d4f;
+    font-size: clamp(1rem, 1.45vw, 1.12rem);
+    font-weight: 400;
+    line-height: 1.7;
+  }
+
+  .markdown-content :global(*) {
+    letter-spacing: 0;
+  }
+
+  .markdown-content :global(*:first-child) {
+    margin-top: 0;
+  }
+
+  .markdown-content :global(*:last-child) {
+    margin-bottom: 0;
+  }
+
+  .markdown-content :global(p),
+  .markdown-content :global(ul),
+  .markdown-content :global(ol) {
+    margin: 0 0 1.65rem;
+  }
+
+  .markdown-content :global(h2),
+  .markdown-content :global(h3) {
+    margin: 2.25rem 0 1rem;
+    color: var(--primary-blue);
+    font-weight: 900;
+    line-height: 1.08;
+  }
+
+  .markdown-content :global(h2) {
+    font-size: clamp(1.7rem, 3vw, 2.25rem);
+  }
+
+  .markdown-content :global(h3) {
+    font-size: clamp(1.35rem, 2.4vw, 1.75rem);
+  }
+
+  .markdown-content :global(ul),
+  .markdown-content :global(ol) {
+    padding-left: 1.25rem;
+  }
+
+  .markdown-content :global(li + li) {
+    margin-top: 0.45rem;
+  }
+
+  .markdown-content :global(a) {
+    color: var(--primary-blue);
+    font-weight: 900;
+    text-decoration: underline;
+    text-underline-offset: 0.25em;
+  }
+
+  .markdown-content :global(img) {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: clamp(1.75rem, 4vw, 2.75rem) 0;
+    border-radius: 0.5rem;
+    object-fit: contain;
+  }
+
+  .markdown-content :global(.instagram-embed) {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+
+  @media (max-width: 760px) {
+    .news-hero {
+      margin-top: 0;
+      padding-top: clamp(7rem, 32vw, 9rem);
+    }
+  }
+</style>

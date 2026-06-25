@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="es-mx">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Conexión Comunitaria</title>
+    <meta name="description" content="Muy pronto..." />
+
+    <link
+      rel="preload"
+      as="image"
+      href="./desktop.png"
+      media="(min-width: 768px)"
+    />
+    <link
+      rel="preload"
+      as="image"
+      href="./mobile.png"
+      media="(max-width: 767px)"
+    />
+
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        width: 100dvw;
+        height: 100dvh;
+        background-image: url("./desktop.png");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+
+      @media (max-width: 470px) {
+        body {
+          background-image: url("./mobile.png");
+        }
+      }
+    </style>
+  </head>
+  <body></body>
+</html>

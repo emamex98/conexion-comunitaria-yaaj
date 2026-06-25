@@ -1,0 +1,54 @@
+---
+type Props = {
+	href: string;
+	class?: string;
+	target?: string;
+	rel?: string;
+};
+
+const {
+	href,
+	class: className,
+	target: targetProp,
+	rel: relProp,
+	...attrs
+} = Astro.props;
+const isExternalLink = /^(https?:)?\/\//i.test(href);
+const target = targetProp ?? (isExternalLink ? "_blank" : undefined);
+const rel = relProp ?? (target === "_blank" ? "noopener noreferrer" : undefined);
+---
+
+<a
+	{...attrs}
+	class:list={["yellow-button", className]}
+	href={href}
+	target={target}
+	rel={rel}
+>
+	<slot />
+</a>
+
+<style>
+	.yellow-button {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 2.75rem;
+		border-radius: 999px;
+		background: var(--accent-yellow);
+		color: #244257;
+		padding: 0.75rem 1.5rem;
+		font-size: 0.9rem;
+		font-weight: 900;
+		text-align: center;
+		text-transform: uppercase;
+		box-shadow: inset 0 -2px 0 rgb(30 75 106 / 0.12);
+	}
+
+	.yellow-button:focus-visible,
+	.yellow-button:hover {
+		background: #ffcf31;
+		outline: 3px solid rgb(30 75 106 / 0.25);
+		outline-offset: 3px;
+	}
+</style>

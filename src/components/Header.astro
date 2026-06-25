@@ -1,0 +1,248 @@
+---
+import { Image } from "astro:assets";
+import logoWeb from "../assets/logo_web.webp";
+
+const navItems = [
+  { label: "Conócenos", href: "/conocenos" },
+  { label: "Organizaciones", href: "/organizaciones" },
+  { label: "Resultados", href: "/resultados" },
+  { label: "Convocatoria", href: "/convocatoria" },
+  { label: "Contacto", href: "/contacto" },
+];
+---
+
+<header class="site-header" data-site-header>
+  <div class="header-inner">
+    <a class="logo-link" href="/" aria-label="Conexion Comunitaria inicio">
+      <Image
+        src={logoWeb}
+        alt="Conexion Comunitaria"
+        class="site-logo"
+        loading="eager"
+      />
+    </a>
+
+    <button
+      class="menu-toggle"
+      type="button"
+      aria-label="Abrir menu"
+      aria-controls="primary-navigation"
+      aria-expanded="false"
+      data-menu-toggle
+    >
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </button>
+
+    <nav
+      id="primary-navigation"
+      class="main-nav"
+      aria-label="Navegacion principal"
+      data-main-nav
+    >
+      {navItems.map((item) => <a href={item.href}>{item.label}</a>)}
+    </nav>
+  </div>
+</header>
+
+<script>
+  const header = document.querySelector("[data-site-header]");
+  const toggle = header?.querySelector("[data-menu-toggle]");
+  const nav = header?.querySelector("[data-main-nav]");
+
+  const setMenuOpen = (isOpen) => {
+    header?.toggleAttribute("data-menu-open", isOpen);
+    toggle?.setAttribute("aria-expanded", String(isOpen));
+    toggle?.setAttribute("aria-label", isOpen ? "Cerrar menu" : "Abrir menu");
+    document.body.classList.toggle("nav-open", isOpen);
+  };
+
+  toggle?.addEventListener("click", () => {
+    setMenuOpen(!header?.hasAttribute("data-menu-open"));
+  });
+
+  nav?.addEventListener("click", (event) => {
+    if (event.target instanceof HTMLAnchorElement) {
+      setMenuOpen(false);
+    }
+  });
+
+  window.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      setMenuOpen(false);
+    }
+  });
+
+  window.addEventListener("resize", () => {
+    if (window.matchMedia("(min-width: 761px)").matches) {
+      setMenuOpen(false);
+    }
+  });
+</script>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: var(--primary-green);
+    box-shadow: 0 1px 0 rgb(30 75 106 / 0.08);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: clamp(1rem, 4vw, 4rem);
+    margin: 0 auto;
+    max-width: var(--page-max);
+    padding: clamp(1rem, 2.6vw, 1.6rem) var(--gutter);
+  }
+
+  .logo-link {
+    position: relative;
+    z-index: 31;
+    display: inline-flex;
+    align-items: center;
+    flex: 0 0 auto;
+  }
+
+  .site-logo {
+    display: block;
+    width: auto;
+    max-width: min(42vw, 15rem);
+    height: clamp(3.25rem, 5.5vw, 5rem);
+  }
+
+  .main-nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.75rem clamp(1rem, 4vw, 3rem);
+    color: var(--primary-blue);
+    font-size: clamp(0.82rem, 1.2vw, 0.95rem);
+    font-weight: 800;
+    text-transform: uppercase;
+  }
+
+  .main-nav a {
+    border-radius: 999px;
+    padding: 0.35rem 0;
+  }
+
+  .main-nav a:focus-visible,
+  .main-nav a:hover {
+    color: #0d2c43;
+    text-decoration: underline;
+    text-underline-offset: 0.35em;
+  }
+
+	.menu-toggle {
+		position: relative;
+		z-index: 31;
+		display: none;
+    width: 2.75rem;
+    aspect-ratio: 1;
+    border: 0;
+    border-radius: 50%;
+    background: var(--primary-blue);
+		color: var(--white);
+		padding: 0.72rem;
+		cursor: pointer;
+		touch-action: manipulation;
+	}
+
+  .menu-toggle span {
+    display: block;
+    height: 2px;
+    border-radius: 999px;
+    background: currentColor;
+    transition:
+      opacity 180ms ease,
+      transform 180ms ease;
+  }
+
+  .menu-toggle span + span {
+    margin-top: 0.28rem;
+  }
+
+  .menu-toggle:focus-visible {
+    outline: 3px solid rgb(30 75 106 / 0.28);
+    outline-offset: 3px;
+  }
+
+  .site-header[data-menu-open] .menu-toggle span:first-child {
+    transform: translateY(0.42rem) rotate(45deg);
+  }
+
+  .site-header[data-menu-open] .menu-toggle span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .site-header[data-menu-open] .menu-toggle span:last-child {
+    transform: translateY(-0.42rem) rotate(-45deg);
+  }
+
+  @media (max-width: 760px) {
+    .header-inner {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 5rem;
+    }
+
+    .menu-toggle {
+      display: grid;
+      align-content: center;
+      margin-left: auto;
+    }
+
+		.main-nav {
+			position: fixed;
+			inset: 0;
+			z-index: 30;
+			display: grid;
+			grid-template-columns: minmax(0, 1fr);
+			align-content: center;
+			justify-items: center;
+			gap: clamp(1.1rem, 5vh, 2rem);
+			width: 100vw;
+			height: 100vh;
+			height: 100dvh;
+			background: var(--primary-green);
+			padding:
+				max(5rem, env(safe-area-inset-top))
+				max(var(--gutter), env(safe-area-inset-right))
+				max(5rem, env(safe-area-inset-bottom))
+				max(var(--gutter), env(safe-area-inset-left));
+			font-size: clamp(2rem, 8.7vw, 2.6rem);
+      line-height: 1.05;
+      text-align: center;
+      visibility: hidden;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-0.75rem);
+      transition:
+        opacity 180ms ease,
+        transform 180ms ease,
+        visibility 180ms ease;
+    }
+
+    .main-nav a {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      padding: 0;
+      overflow-wrap: anywhere;
+    }
+
+    .site-header[data-menu-open] .main-nav {
+      visibility: visible;
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+  }
+</style>

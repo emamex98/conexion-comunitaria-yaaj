@@ -1,0 +1,289 @@
+---
+import { Image } from "astro:assets";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import newsHeroImage from "../../assets/imagen8.webp";
+
+type NewsEntry = {
+  frontmatter?: {
+    title?: string;
+    description?: string;
+    date?: string | Date;
+    pubDate?: string | Date;
+  };
+  rawContent?: () => string;
+};
+
+const newsModules = import.meta.glob<NewsEntry>("../../content/news/*.md", {
+  eager: true,
+});
+
+const toDateValue = (date?: string | Date) => {
+  if (!date) return 0;
+  const parsed = date instanceof Date ? date : new Date(date);
+  return Number.isNaN(parsed.valueOf()) ? 0 : parsed.valueOf();
+};
+
+const formatDate = (date?: string | Date) => {
+  const value = toDateValue(date);
+  if (!value) return undefined;
+
+  return new Intl.DateTimeFormat("es-MX", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  }).format(value);
+};
+
+const createExcerpt = (entry: NewsEntry) =>
+  entry.frontmatter?.description ??
+  entry
+    .rawContent?.()
+    .replace(/^---[\s\S]*?---/, "")
+    .replace(/!\[[^\]]*\]\([^)]+\)/g, "")
+    .replace(/\[[^\]]+\]\([^)]+\)/g, "$1")
+    .replace(/[#*_>`-]/g, "")
+    .replace(/\s+/g, " ")
+    .trim()
+    .slice(0, 180);
+
+const news = Object.entries(newsModules)
+  .map(([path, entry]) => {
+    const title = entry.frontmatter?.title?.trim();
+    const date = entry.frontmatter?.date ?? entry.frontmatter?.pubDate;
+
+    return {
+      title,
+      date,
+      formattedDate: formatDate(date),
+      excerpt: createExcerpt(entry),
+      href: `/noticias/${path.split("/").pop()?.replace(/\.md$/, "")}`,
+    };
+  })
+  .filter((entry) => entry.title && entry.excerpt)
+  .sort((a, b) => toDateValue(b.date) - toDateValue(a.date));
+---
+
+<BaseLayout
+  title="Noticias"
+  description="Ultimas noticias de Conexión Comunitaria."
+>
+  <section class="news-hero" aria-labelledby="news-title">
+    <Image src={newsHeroImage} alt="" class="news-hero-image" loading="eager" />
+    <div class="hero-inner">
+      <h1 id="news-title">Noticias</h1>
+    </div>
+  </section>
+
+  <section class="news-list-section" aria-label="Listado de noticias">
+    <div class="news-list-inner">
+      {
+        news.length > 0 ? (
+          <div class="news-list">
+            {news.map((entry) => (
+              <article class="news-card">
+                {entry.formattedDate && <time>{entry.formattedDate}</time>}
+                <h2>{entry.title}</h2>
+                <p>{entry.excerpt}</p>
+                <a class="news-card-cta" href={entry.href}>
+                  Leer más
+                </a>
+              </article>
+            ))}
+          </div>
+        ) : (
+          <p class="empty-news">Pronto compartiremos nuevas actualizaciones.</p>
+        )
+      }
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .news-hero {
+    --hero-height: clamp(22rem, 42vw, 31rem);
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 0;
+    display: grid;
+    align-items: center;
+    height: var(--hero-height);
+    min-height: var(--hero-height);
+    overflow: hidden;
+    background: linear-gradient(135deg, #f6fbf8, #c8ded6);
+  }
+
+  .news-hero::before {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    content: "";
+    pointer-events: none;
+    background: rgb(255 255 255 / 0.64);
+  }
+
+  .news-hero-image {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .hero-inner,
+  .news-list-inner {
+    margin: 0 auto;
+    width: min(100%, var(--page-max));
+  }
+
+  .hero-inner {
+    position: relative;
+    z-index: 2;
+    padding: clamp(3rem, 7vw, 5.5rem) var(--gutter);
+  }
+
+  h1 {
+    max-width: 12ch;
+    margin: 0;
+    color: var(--primary-blue);
+    font-size: clamp(2.6rem, 6vw, 4.6rem);
+    font-weight: 900;
+    line-height: 1.02;
+    letter-spacing: 0;
+  }
+
+  .news-list-section {
+    --hero-height: clamp(22rem, 42vw, 31rem);
+    --header-flow-height: clamp(4.25rem, 7vw, 5.75rem);
+    position: relative;
+    z-index: 2;
+    margin-top: calc(var(--hero-height) - var(--header-flow-height));
+    background: var(--white);
+    padding: clamp(3.5rem, 7vw, 6rem) var(--gutter);
+  }
+
+  .news-list {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(1rem, 2vw, 1.5rem);
+  }
+
+  .news-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    min-height: 14rem;
+    border: 1px solid rgb(30 75 106 / 0.1);
+    border-radius: 0.5rem;
+    background: #f8fbfa;
+    color: #263d4d;
+    padding: clamp(1.2rem, 2.4vw, 1.5rem);
+    transition:
+      border-color 180ms ease,
+      box-shadow 180ms ease,
+      transform 180ms ease;
+  }
+
+  .news-card time {
+    color: #557081;
+    font-size: 0.82rem;
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+
+  .news-card h2 {
+    margin: 0;
+    color: var(--primary-blue);
+    font-size: clamp(1.25rem, 2vw, 1.55rem);
+    font-weight: 900;
+    line-height: 1.08;
+    letter-spacing: 0;
+  }
+
+  .news-card p,
+  .empty-news {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.35;
+  }
+
+  .news-card p {
+    flex: 1;
+  }
+
+  .news-card-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    min-height: 2.45rem;
+    margin-top: 0.25rem;
+    border-radius: 999px;
+    background: var(--accent-yellow);
+    color: #244257;
+    padding: 0.68rem 1.15rem;
+    font-size: 0.82rem;
+    font-weight: 900;
+    line-height: 1;
+    text-align: center;
+    text-transform: uppercase;
+    box-shadow: inset 0 -2px 0 rgb(30 75 106 / 0.12);
+  }
+
+  .news-card-cta:focus-visible,
+  .news-card-cta:hover {
+    background: #ffcf31;
+    outline: 3px solid rgb(30 75 106 / 0.25);
+    outline-offset: 3px;
+  }
+
+  .news-card:focus-within,
+  .news-card:hover {
+    border-color: rgb(30 75 106 / 0.28);
+    box-shadow: 0 1rem 2.5rem rgb(30 75 106 / 0.12);
+    transform: translateY(-0.2rem);
+  }
+
+  .empty-news {
+    color: #476171;
+  }
+
+  @media (max-width: 900px) {
+    .news-list {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 760px) {
+    .news-hero {
+      --hero-height: clamp(19rem, 82vw, 26rem);
+      background-position: center;
+    }
+
+    .hero-inner {
+      padding-block: clamp(5.75rem, 26vw, 8rem) clamp(2.5rem, 16vw, 4rem);
+    }
+
+    h1 {
+      font-size: clamp(2.55rem, 13vw, 4rem);
+    }
+
+    .news-list-section {
+      --hero-height: clamp(19rem, 82vw, 26rem);
+      --header-flow-height: 0rem;
+      padding-block: clamp(3rem, 12vw, 4.75rem);
+    }
+
+    .news-list {
+      grid-template-columns: 1fr;
+    }
+
+    .news-card {
+      min-height: 11rem;
+    }
+  }
+</style>

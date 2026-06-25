@@ -1,0 +1,372 @@
+---
+import YellowButton from "../components/YellowButton.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+type MarkdownPage = {
+  default: any;
+  frontmatter: {
+    title?: string;
+    description?: string;
+    heroTitle?: string;
+    heroImage?: string;
+    heroAlt?: string;
+    ctaLabel?: string;
+    ctaHref?: string;
+  };
+};
+
+export function getStaticPaths() {
+  const contentPages = import.meta.glob<MarkdownPage>("../content/*.md", {
+    eager: true,
+  });
+
+  return Object.entries(contentPages).map(([path, page]) => {
+    const slug = path.split("/").pop()?.replace(/\.md$/, "");
+
+    return {
+      params: { slug },
+      props: { page },
+    };
+  });
+}
+
+const { page } = Astro.props;
+const Content = page.default;
+const {
+  title = "Conexión Comunitaria",
+  description = "Pruebas de VIH al alcance de todxs.",
+  heroTitle = title,
+  heroImage,
+  heroAlt = "",
+  ctaLabel,
+  ctaHref,
+} = page.frontmatter;
+---
+
+<BaseLayout title={title} description={description}>
+  <section
+    class:list={["page-hero", { "has-image": Boolean(heroImage) }]}
+    style={heroImage ? `--hero-image: url("${heroImage}")` : undefined}
+    aria-labelledby="page-title"
+  >
+    <div class="hero-overlay">
+      <h1 id="page-title">{heroTitle}</h1>
+    </div>
+    {heroImage && <img src={heroImage} alt={heroAlt} loading="eager" />}
+  </section>
+
+  <section class="content-section" aria-label="Contenido principal">
+    <article class="markdown-content">
+      <Content />
+
+      {
+        ctaLabel && ctaHref && (
+          <p class="content-cta">
+            <YellowButton href={ctaHref}>{ctaLabel}</YellowButton>
+          </p>
+        )
+      }
+    </article>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero {
+    --hero-height: clamp(22rem, 42vw, 31rem);
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 0;
+    display: grid;
+    align-items: center;
+    height: var(--hero-height);
+    min-height: var(--hero-height);
+    overflow: hidden;
+    background: linear-gradient(135deg, #f6fbf8, #c8ded6);
+  }
+
+  .page-hero.has-image {
+    background: var(--hero-image) center / cover no-repeat;
+  }
+
+  .page-hero::before {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    content: "";
+    pointer-events: none;
+    background: rgb(255 255 255 / 0.64);
+  }
+
+  .page-hero img {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .hero-overlay {
+    position: relative;
+    z-index: 2;
+    margin: 0 auto;
+    width: min(100%, var(--page-max));
+    padding: clamp(3rem, 7vw, 5.5rem) var(--gutter);
+  }
+
+  h1 {
+    max-width: 12ch;
+    margin: 0;
+    color: var(--primary-blue);
+    font-size: clamp(2.85rem, 6.2vw, 5rem);
+    font-weight: 900;
+    line-height: 1.02;
+    letter-spacing: 0;
+  }
+
+  .content-section {
+    --hero-height: clamp(22rem, 42vw, 31rem);
+    --header-flow-height: clamp(4.25rem, 7vw, 5.75rem);
+    position: relative;
+    z-index: 2;
+    margin-top: calc(var(--hero-height) - var(--header-flow-height));
+    background: #fff;
+    padding: clamp(4rem, 8vw, 6.75rem) var(--gutter);
+  }
+
+  .markdown-content {
+    margin: 0 auto;
+    max-width: 56rem;
+    color: #243d4f;
+    font-size: clamp(1rem, 1.45vw, 1.12rem);
+    font-weight: 700;
+    line-height: 1.36;
+  }
+
+  .markdown-content :global(*) {
+    letter-spacing: 0;
+  }
+
+  .markdown-content :global(*:first-child) {
+    margin-top: 0;
+  }
+
+  .markdown-content :global(*:last-child) {
+    margin-bottom: 0;
+  }
+
+  .markdown-content :global(p),
+  .markdown-content :global(ul),
+  .markdown-content :global(ol) {
+    margin: 0 0 1.35rem;
+  }
+
+  .markdown-content :global(h2),
+  .markdown-content :global(h3) {
+    margin: 2.25rem 0 1rem;
+    color: var(--primary-blue);
+    font-weight: 900;
+    line-height: 1.08;
+  }
+
+  .markdown-content :global(h2) {
+    font-size: clamp(1.7rem, 3vw, 2.25rem);
+  }
+
+  .markdown-content :global(h3) {
+    font-size: clamp(1.35rem, 2.4vw, 1.75rem);
+  }
+
+  .markdown-content :global(ul),
+  .markdown-content :global(ol) {
+    padding-left: 1.25rem;
+  }
+
+  .markdown-content :global(li + li) {
+    margin-top: 0.45rem;
+  }
+
+  .markdown-content :global(a) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    min-height: 2.75rem;
+    margin: 1.5rem auto;
+    border-radius: 999px;
+    background: var(--accent-yellow);
+    color: #244257;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.9rem;
+    font-weight: 900;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    box-shadow: inset 0 -2px 0 rgb(30 75 106 / 0.12);
+  }
+
+  .markdown-content :global(a:focus-visible),
+  .markdown-content :global(a:hover) {
+    background: #ffcf31;
+    outline: 3px solid rgb(30 75 106 / 0.25);
+    outline-offset: 3px;
+  }
+
+  .markdown-content :global(img) {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: clamp(1.75rem, 4vw, 2.75rem) 0;
+    object-fit: contain;
+  }
+
+  .markdown-content :global(p:has(> img:only-child)) {
+    margin: clamp(1.75rem, 4vw, 2.75rem) 0;
+  }
+
+  .markdown-content :global(p:has(> img:only-child) img) {
+    margin: 0;
+  }
+
+  .markdown-content :global(.contact-panel) {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+    margin: clamp(1.25rem, 3vw, 2rem) 0 clamp(1.75rem, 4vw, 2.75rem);
+  }
+
+  .markdown-content :global(.contact-card),
+  .markdown-content :global(.social-panel a) {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: auto;
+    min-height: 0;
+    margin: 0;
+    border: 1px solid rgb(30 75 106 / 0.14);
+    border-radius: 8px;
+    background: #f6fbf8;
+    color: var(--ink);
+    padding: 1rem;
+    font-size: 1rem;
+    font-weight: 800;
+    line-height: 1.25;
+    text-align: left;
+    text-decoration: none;
+    text-transform: none;
+    box-shadow: 0 12px 28px rgb(30 75 106 / 0.08);
+    transition:
+      border-color 180ms ease,
+      box-shadow 180ms ease,
+      transform 180ms ease;
+  }
+
+  .markdown-content :global(.contact-card[href]:hover),
+  .markdown-content :global(.contact-card[href]:focus-visible),
+  .markdown-content :global(.social-panel a:hover),
+  .markdown-content :global(.social-panel a:focus-visible) {
+    border-color: rgb(30 75 106 / 0.34);
+    background: #ffffff;
+    outline: 3px solid rgb(255 217 92 / 0.6);
+    outline-offset: 3px;
+    box-shadow: 0 16px 34px rgb(30 75 106 / 0.14);
+    transform: translateY(-2px);
+  }
+
+  .markdown-content :global(.contact-card > span:last-child),
+  .markdown-content :global(.social-panel a > span:last-child) {
+    display: grid;
+    gap: 0.2rem;
+    min-width: 0;
+  }
+
+  .markdown-content :global(.contact-card strong),
+  .markdown-content :global(.social-panel strong) {
+    display: block;
+    color: var(--primary-blue);
+    font-size: 0.78rem;
+    font-weight: 900;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .markdown-content :global(.contact-card span span),
+  .markdown-content :global(.social-panel a span) {
+    overflow-wrap: anywhere;
+  }
+
+  .markdown-content :global(.contact-icon),
+  .markdown-content :global(.social-icon) {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    margin-right: 0.8rem;
+    border-radius: 8px;
+    background: var(--accent-yellow);
+    color: var(--primary-blue);
+    font-size: 1rem;
+    font-weight: 900;
+    line-height: 1;
+  }
+
+  .markdown-content :global(.contact-icon svg),
+  .markdown-content :global(.social-icon svg) {
+    width: 1.35rem;
+    height: 1.35rem;
+    margin: 0;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.9;
+  }
+
+  .markdown-content :global(.social-panel) {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.85rem;
+    margin: 0 0 clamp(2rem, 4vw, 3rem);
+  }
+
+  .content-cta {
+    display: flex;
+    justify-content: center;
+    margin-top: clamp(2rem, 5vw, 3.25rem);
+  }
+
+  .content-cta :global(a) {
+    margin: 0;
+  }
+
+  @media (max-width: 760px) {
+    .page-hero,
+    .page-hero.has-image {
+      --hero-height: clamp(19rem, 82vw, 26rem);
+      background-position: center;
+    }
+
+    .hero-overlay {
+      padding-block: clamp(5.75rem, 26vw, 8rem) clamp(2.5rem, 16vw, 4rem);
+    }
+
+    h1 {
+      font-size: clamp(2.55rem, 13vw, 4rem);
+    }
+
+    .content-section {
+      --hero-height: clamp(19rem, 82vw, 26rem);
+      --header-flow-height: 0rem;
+      padding-block: clamp(3rem, 12vw, 4.75rem);
+    }
+
+    .markdown-content :global(.contact-panel),
+    .markdown-content :global(.social-panel) {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

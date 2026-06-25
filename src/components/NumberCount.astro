@@ -1,0 +1,154 @@
+---
+type Props = {
+	number: number | string;
+	subheader: string;
+	class?: string;
+};
+
+const { number, subheader, class: className } = Astro.props;
+const displayNumber = String(number);
+---
+
+<div class:list={["number-count", className]}>
+	<span class="number-count__value" data-count-number={displayNumber}>
+		{displayNumber}
+	</span>
+	<span class="number-count__subheader">{subheader}</span>
+</div>
+
+<script>
+	const counters = document.querySelectorAll("[data-count-number]");
+	const prefersReducedMotion = window.matchMedia(
+		"(prefers-reduced-motion: reduce)",
+	).matches;
+
+	const parseCounterValue = (value) => {
+		const match = value.trim().match(/^([^0-9+-]*)([+-]?[\d,]*\.?\d+)(.*)$/);
+
+		if (!match) {
+			return null;
+		}
+
+		const [, prefix, numericValue, suffix] = match;
+		const decimals = numericValue.includes(".")
+			? numericValue.split(".")[1].length
+			: 0;
+		const usesGrouping = numericValue.includes(",");
+		const target = Number(numericValue.replace(/,/g, ""));
+
+		if (!Number.isFinite(target)) {
+			return null;
+		}
+
+		return {
+			prefix,
+			suffix,
+			target,
+			decimals,
+			usesGrouping,
+		};
+	};
+
+	const formatCounterValue = (value, options) => {
+		const numberFormatter = new Intl.NumberFormat(undefined, {
+			useGrouping: options.usesGrouping,
+			minimumFractionDigits: options.decimals,
+			maximumFractionDigits: options.decimals,
+		});
+
+		return `${options.prefix}${numberFormatter.format(value)}${options.suffix}`;
+	};
+
+	const animateCounter = (counter) => {
+		if (counter.dataset.countAnimated === "true") {
+			return;
+		}
+
+		const counterOptions = parseCounterValue(counter.dataset.countNumber || "");
+
+		if (!counterOptions) {
+			return;
+		}
+
+		counter.dataset.countAnimated = "true";
+
+		if (prefersReducedMotion) {
+			counter.textContent = formatCounterValue(
+				counterOptions.target,
+				counterOptions,
+			);
+			return;
+		}
+
+		const duration = 1200;
+		const startTime = performance.now();
+		const startValue = 0;
+		const targetValue = counterOptions.target;
+
+		const step = (currentTime) => {
+			const elapsed = currentTime - startTime;
+			const progress = Math.min(elapsed / duration, 1);
+			const easedProgress = 1 - Math.pow(1 - progress, 3);
+			const currentValue =
+				startValue + (targetValue - startValue) * easedProgress;
+
+			counter.textContent = formatCounterValue(currentValue, counterOptions);
+
+			if (progress < 1) {
+				window.requestAnimationFrame(step);
+			}
+		};
+
+		window.requestAnimationFrame(step);
+	};
+
+	if ("IntersectionObserver" in window) {
+		const observer = new IntersectionObserver(
+			(entries) => {
+				for (const entry of entries) {
+					if (entry.isIntersecting) {
+						animateCounter(entry.target);
+						observer.unobserve(entry.target);
+					}
+				}
+			},
+			{ threshold: 0.35 },
+		);
+
+		for (const counter of counters) {
+			observer.observe(counter);
+		}
+	} else {
+		for (const counter of counters) {
+			animateCounter(counter);
+		}
+	}
+</script>
+
+<style>
+	.number-count {
+		display: inline-grid;
+		justify-items: center;
+		gap: 0.25rem;
+		color: #003b31;
+		line-height: 1;
+		text-align: center;
+	}
+
+	.number-count__value {
+		display: block;
+		font-size: clamp(4rem, 15vw, 6.5rem);
+		font-weight: 900;
+		letter-spacing: 0;
+		white-space: nowrap;
+	}
+
+	.number-count__subheader {
+		display: block;
+		color: currentColor;
+		font-size: clamp(1.6rem, 5vw, 2.35rem);
+		font-weight: 900;
+		letter-spacing: 0;
+		white-space: nowrap;
+	}
+</style>

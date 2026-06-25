@@ -1,0 +1,616 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import MexicoMap from "../components/MexicoMap.astro";
+import directorio from "../content/directorio.json";
+import Logos from "../assets/logos-organizaciones.webp";
+import { Image } from "astro:assets";
+
+type SocialLink = {
+  nombre: string;
+  usuario: string;
+  url: string;
+};
+
+type Organization = {
+  nombre: string;
+  ubicacion?: string;
+  telefono?: string;
+  web?: string;
+  email?: string;
+  rrss?: SocialLink[];
+};
+
+const stateIdOverrides: Record<string, string> = {
+  CDMX: "cdmx",
+  "Ciudad de México": "cdmx",
+  "Nuevo León": "nuevo-leon",
+  "Baja California": "baja-california-norte",
+};
+
+const getStateId = (state: string) =>
+  stateIdOverrides[state] ??
+  state
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+
+const normalizeUrl = (url?: string) => {
+  if (!url) return undefined;
+  return /^https?:\/\//i.test(url) ? url : `https://${url}`;
+};
+
+const directoryEntries = Object.entries(
+  directorio as Record<string, Organization[]>,
+)
+  .sort(([stateA], [stateB]) => {
+    if (stateA === "CDMX") return -1;
+    if (stateB === "CDMX") return 1;
+    return stateA.localeCompare(stateB, "es", { sensitivity: "base" });
+  })
+  .map(([state, organizations]) => ({
+    state,
+    stateId: getStateId(state),
+    organizations,
+  }));
+---
+
+<BaseLayout
+  title="Organizaciones"
+  description="Directorio de organizaciones de la red Conexión Comunitaria."
+>
+  <section class="page-hero" aria-labelledby="page-title">
+    <div class="hero-overlay">
+      <h1 id="page-title">Organizaciones</h1>
+    </div>
+  </section>
+
+  <section class="content-section" aria-label="Contenido principal">
+    <article class="markdown-content">
+      <p>
+        La respuesta al VIH en México no puede entenderse sin el trabajo de las
+        organizaciones comunitarias. Desde hace décadas, colectivos,
+        organizaciones de la sociedad civil y liderazgos locales han desempeñado
+        un papel fundamental en la prevención, la promoción de la salud, el
+        acompañamiento de personas con VIH y la defensa de los derechos humanos.
+      </p>
+      <p>
+        Su cercanía con las comunidades les permite identificar necesidades,
+        reducir barreras de acceso a los servicios de salud y generar
+        estrategias adaptadas a contextos específicos. Gracias a su presencia
+        territorial, estas organizaciones logran acercar información, pruebas de
+        detección, consejería y procesos de vinculación a poblaciones que
+        históricamente han enfrentado mayores obstáculos para ejercer su derecho
+        a la salud.
+      </p>
+      <p>
+        Conexión Comunitaria reconoce y fortalece este trabajo mediante una red
+        nacional de colaboración que impulsa capacidades técnicas, intercambio
+        de experiencias y acciones coordinadas para ampliar el acceso a la
+        prevención y detección oportuna del VIH.
+      </p>
+      <p>
+        Actualmente, la red tiene presencia en 16 estados de la República
+        Mexicana y está integrada por más de 50 organizaciones, colectivos y
+        agrupaciones comprometidas con la construcción de comunidades más
+        informadas, saludables e inclusivas.
+      </p>
+      <p>
+        Las siguientes organizaciones forman parte de la red de Conexión
+        Comunitaria. A través de su trabajo territorial contribuyen a ampliar el
+        acceso a servicios de prevención, detección y acompañamiento
+        relacionados con el VIH en distintas regiones del país.
+      </p>
+      <Image
+        src={Logos}
+        alt="Logos Organizaciones"
+        loading="eager"
+        class="inline-image"
+      />
+    </article>
+
+    <div
+      class="directory-layout"
+      data-directory
+      data-clickable-state-ids={JSON.stringify(
+        directoryEntries.map(({ stateId }) => stateId),
+      )}
+    >
+      <div
+        class="organization-list"
+        data-organization-list
+        aria-label="Directorio de organizaciones por estado"
+        tabindex="0"
+      >
+        {
+          directoryEntries.map(({ state, stateId, organizations }) => (
+            <section
+              class="state-group"
+              data-state-id={stateId}
+              aria-labelledby={`state-${stateId}`}
+            >
+              <header class="state-heading">
+                <h2 id={`state-${stateId}`}>{state}</h2>
+                <span>{organizations.length}</span>
+              </header>
+
+              <div class="organization-cards">
+                {organizations.map((organization) => (
+                  <article class="organization-card">
+                    <h3>{organization.nombre}</h3>
+                    {organization.ubicacion && <p>{organization.ubicacion}</p>}
+                    <dl>
+                      {organization.telefono && (
+                        <>
+                          <dt>Teléfono</dt>
+                          <dd>
+                            <a
+                              href={`tel:${organization.telefono.replace(/[^\d+]/g, "")}`}
+                            >
+                              {organization.telefono}
+                            </a>
+                          </dd>
+                        </>
+                      )}
+                      {organization.email && (
+                        <>
+                          <dt>Email</dt>
+                          <dd>{organization.email}</dd>
+                        </>
+                      )}
+                      {organization.web && (
+                        <>
+                          <dt>Web</dt>
+                          <dd>
+                            <a
+                              href={normalizeUrl(organization.web)}
+                              target="_blank"
+                              rel="noreferrer"
+                            >
+                              {organization.web}
+                            </a>
+                          </dd>
+                        </>
+                      )}
+                    </dl>
+                    {organization.rrss && organization.rrss.length > 0 && (
+                      <ul
+                        class="social-list"
+                        aria-label={`Redes sociales de ${organization.nombre}`}
+                      >
+                        {organization.rrss.map((social) => (
+                          <li>
+                            <a
+                              href={social.url}
+                              target="_blank"
+                              rel="noreferrer"
+                            >
+                              <span>{social.nombre}</span>
+                              {social.usuario}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </article>
+                ))}
+              </div>
+            </section>
+          ))
+        }
+      </div>
+
+      <aside class="map-panel" aria-label="Mapa de organizaciones por estado">
+        <MexicoMap />
+      </aside>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  const directory = document.querySelector("[data-directory]");
+  const list = directory?.querySelector("[data-organization-list]");
+  const stateGroups = Array.from(
+    directory?.querySelectorAll<HTMLElement>("[data-state-id]") ?? [],
+  );
+  const mapStates = Array.from(
+    directory?.querySelectorAll<SVGPathElement>(".mapa-estado") ?? [],
+  );
+  const clickableStateIds = new Set(
+    JSON.parse(directory?.getAttribute("data-clickable-state-ids") ?? "[]"),
+  );
+  const stateGroupsById = new Map(
+    stateGroups.map((group) => [group.dataset.stateId, group]),
+  );
+
+  const setActiveState = (stateId: string) => {
+    mapStates.forEach((path) => {
+      path.classList.toggle("is-active", path.id === stateId);
+    });
+  };
+
+  const scrollToState = (stateId: string) => {
+    const group = stateGroupsById.get(stateId);
+    if (!list || !group) return;
+
+    list.scrollTo({
+      top: group.offsetTop - list.offsetTop,
+      behavior: "smooth",
+    });
+    setActiveState(stateId);
+  };
+
+  const updateActiveState = () => {
+    if (!list || stateGroups.length === 0) return;
+
+    const isAtBottom =
+      list.scrollTop + list.clientHeight >= list.scrollHeight - 2;
+    const scrollTop = list.scrollTop + 12;
+    const activeGroup = isAtBottom
+      ? stateGroups[stateGroups.length - 1]
+      : (stateGroups.findLast(
+          (group) => group.offsetTop - list.offsetTop <= scrollTop,
+        ) ?? stateGroups[0]);
+
+    setActiveState(activeGroup.dataset.stateId ?? "");
+  };
+
+  mapStates.forEach((path) => {
+    const isClickable = clickableStateIds.has(path.id);
+    path.classList.toggle("is-clickable", isClickable);
+
+    if (!isClickable) return;
+
+    path.setAttribute("tabindex", "0");
+    path.setAttribute("role", "button");
+    const stateName =
+      stateGroupsById.get(path.id)?.querySelector("h2")?.textContent ?? path.id;
+
+    path.setAttribute("aria-label", `Ver organizaciones en ${stateName}`);
+
+    path.addEventListener("click", () => scrollToState(path.id));
+    path.addEventListener("keydown", (event) => {
+      if (event.key !== "Enter" && event.key !== " ") return;
+      event.preventDefault();
+      scrollToState(path.id);
+    });
+  });
+
+  list?.addEventListener("scroll", updateActiveState, { passive: true });
+  updateActiveState();
+</script>
+
+<style>
+  .page-hero {
+    --hero-height: clamp(22rem, 42vw, 31rem);
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 0;
+    display: grid;
+    align-items: center;
+    height: var(--hero-height);
+    min-height: var(--hero-height);
+    overflow: hidden;
+    background: url("/imagen6.webp") center / cover no-repeat;
+  }
+
+  .page-hero::before {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    content: "";
+    pointer-events: none;
+    background: rgb(255 255 255 / 0.64);
+  }
+
+  .hero-overlay {
+    position: relative;
+    z-index: 2;
+    margin: 0 auto;
+    width: min(100%, var(--page-max));
+    padding: clamp(3rem, 7vw, 5.5rem) var(--gutter);
+  }
+
+  .inline-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: clamp(1.75rem, 4vw, 2.75rem) 0;
+    object-fit: contain;
+  }
+
+  h1 {
+    max-width: 12ch;
+    margin: 0;
+    color: var(--primary-blue);
+    font-size: clamp(2.85rem, 6.2vw, 5rem);
+    font-weight: 900;
+    line-height: 1.02;
+    letter-spacing: 0;
+  }
+
+  .content-section {
+    --hero-height: clamp(22rem, 42vw, 31rem);
+    --header-flow-height: clamp(4.25rem, 7vw, 5.75rem);
+    position: relative;
+    z-index: 2;
+    margin-top: calc(var(--hero-height) - var(--header-flow-height));
+    background: #fff;
+    padding: clamp(4rem, 8vw, 6.75rem) var(--gutter);
+  }
+
+  .markdown-content {
+    margin: 0 auto;
+    max-width: 56rem;
+    color: #243d4f;
+    font-size: clamp(1rem, 1.45vw, 1.12rem);
+    font-weight: 700;
+    line-height: 1.36;
+  }
+
+  .markdown-content :global(*) {
+    letter-spacing: 0;
+  }
+
+  .markdown-content :global(*:first-child) {
+    margin-top: 0;
+  }
+
+  .markdown-content :global(*:last-child) {
+    margin-bottom: 0;
+  }
+
+  .markdown-content :global(p) {
+    margin: 0 0 1.35rem;
+  }
+
+  .directory-layout {
+    display: grid;
+    grid-template-columns: minmax(20rem, 0.95fr) minmax(21rem, 1.05fr);
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: start;
+    width: min(100%, var(--page-max));
+    margin: clamp(3rem, 7vw, 5rem) auto 0;
+  }
+
+  .organization-list {
+    --directory-list-height: min(44rem, calc(100vh - 8rem));
+    max-height: var(--directory-list-height);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 0 clamp(0.75rem, 2vw, 1.25rem) 0.75rem 0;
+    scroll-padding-top: 1rem;
+  }
+
+  .organization-list:focus-visible {
+    outline: 3px solid rgb(30 75 106 / 0.25);
+    outline-offset: 0.35rem;
+  }
+
+  .state-group {
+    padding-block: 0 2rem;
+  }
+
+  .state-group + .state-group {
+    padding-top: 1rem;
+    border-top: 1px solid rgb(30 75 106 / 0.12);
+  }
+
+  .state-group:last-child {
+    padding-bottom: max(2rem, calc(var(--directory-list-height) - 5rem));
+  }
+
+  .state-heading {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(#fff 72%, rgb(255 255 255 / 0));
+    padding: 0.5rem 0 1rem;
+  }
+
+  .state-heading h2 {
+    margin: 0;
+    color: var(--primary-blue);
+    font-size: clamp(1.4rem, 2.6vw, 2rem);
+    font-weight: 900;
+    line-height: 1.08;
+    letter-spacing: 0;
+  }
+
+  .state-heading span {
+    display: inline-grid;
+    place-items: center;
+    min-width: 2.25rem;
+    min-height: 2.25rem;
+    border-radius: 999px;
+    background: var(--accent-yellow);
+    color: #244257;
+    font-size: 0.9rem;
+    font-weight: 900;
+  }
+
+  .organization-cards {
+    display: grid;
+    gap: 0.85rem;
+  }
+
+  .organization-card {
+    border: 1px solid rgb(30 75 106 / 0.14);
+    border-radius: 8px;
+    background: #fff;
+    padding: 1rem;
+    box-shadow: 0 0.75rem 1.5rem rgb(30 75 106 / 0.06);
+  }
+
+  .organization-card h3 {
+    margin: 0;
+    color: #1f425d;
+    font-size: 1.05rem;
+    font-weight: 900;
+    line-height: 1.15;
+    letter-spacing: 0;
+  }
+
+  .organization-card p {
+    margin: 0.4rem 0 0;
+    color: var(--muted);
+    font-size: 0.95rem;
+    font-weight: 800;
+  }
+
+  .organization-card dl {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 0.35rem 0.75rem;
+    margin: 0.85rem 0 0;
+    font-size: 0.92rem;
+    line-height: 1.3;
+  }
+
+  .organization-card dt {
+    color: #48677b;
+    font-weight: 900;
+  }
+
+  .organization-card dd {
+    min-width: 0;
+    margin: 0;
+    color: #244257;
+    font-weight: 800;
+    overflow-wrap: anywhere;
+  }
+
+  .organization-card a {
+    text-decoration: underline;
+    text-decoration-thickness: 0.08em;
+    text-underline-offset: 0.18em;
+  }
+
+  .organization-card a:hover,
+  .organization-card a:focus-visible {
+    color: var(--primary-blue);
+  }
+
+  .social-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0.9rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .social-list a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    border-radius: 999px;
+    background: #f2f8f5;
+    color: #244257;
+    padding: 0.45rem 0.65rem;
+    font-size: 0.8rem;
+    font-weight: 900;
+    text-decoration: none;
+  }
+
+  .social-list span {
+    color: #547184;
+  }
+
+  .map-panel {
+    position: sticky;
+    top: clamp(5.75rem, 9vw, 7.5rem);
+    min-width: 0;
+  }
+
+  .map-panel :global(svg) {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: min(34rem, calc(100vh - 9rem));
+  }
+
+  .map-panel :global(.mapa-estado) {
+    fill: #d8ebe4;
+    stroke: #ffffff;
+    stroke-width: 1.5;
+    transition:
+      fill 180ms ease,
+      filter 180ms ease;
+  }
+
+  .map-panel :global(.mapa-estado.is-clickable) {
+    fill: #7bbfac;
+    cursor: pointer;
+  }
+
+  .map-panel :global(.mapa-estado.is-clickable:focus) {
+    outline: none;
+  }
+
+  .map-panel :global(.mapa-estado.is-clickable:hover),
+  .map-panel :global(.mapa-estado.is-clickable:focus-visible) {
+    fill: #5fae98;
+  }
+
+  .map-panel :global(.mapa-estado.is-active) {
+    fill: var(--accent-yellow);
+    filter: drop-shadow(0 0.35rem 0.45rem rgb(30 75 106 / 0.22));
+  }
+
+  .map-panel :global(.mapa-estado.is-active:hover),
+  .map-panel :global(.mapa-estado.is-active:focus-visible) {
+    fill: #ffcf31;
+  }
+
+  @media (max-width: 860px) {
+    .directory-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .map-panel {
+      order: -1;
+      position: static;
+    }
+
+    .map-panel :global(svg) {
+      max-height: 24rem;
+    }
+
+    .organization-list {
+      --directory-list-height: min(38rem, 70vh);
+      max-height: min(38rem, 70vh);
+      padding-right: 0.5rem;
+    }
+  }
+
+  @media (max-width: 760px) {
+    .page-hero {
+      --hero-height: clamp(19rem, 82vw, 26rem);
+    }
+
+    .hero-overlay {
+      padding-block: clamp(5.75rem, 26vw, 8rem) clamp(2.5rem, 16vw, 4rem);
+    }
+
+    h1 {
+      max-width: 100%;
+      font-size: clamp(2.15rem, 10.6vw, 3.35rem);
+      overflow-wrap: anywhere;
+    }
+
+    .content-section {
+      --hero-height: clamp(19rem, 82vw, 26rem);
+      --header-flow-height: 0rem;
+      padding-block: clamp(3rem, 12vw, 4.75rem);
+    }
+  }
+</style>
