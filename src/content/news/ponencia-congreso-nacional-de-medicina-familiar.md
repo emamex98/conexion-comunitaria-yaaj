@@ -1,6 +1,6 @@
 ---
 title: Participamos con ponencia en el Congreso Nacional de Medicina Familiar
-description: Carlos Ahedo, Coordinador de Conexión Comunitaria Yaaj, presentó la ponencia "Prevención Combinada del VIH - Herramientas para el primer nivel de atención" en el XXXVI Congreso Nacional de Medicina Familiar en Puebla, promoviendo la integración de pruebas rápidas de VIH, sífilis y hepatitis C en consultorios de primer nivel para garantizar una atención accesible, empática y libre de estigmas.
+description: Carlos Ahedo, Coordinador de Conexión Comunitaria, presentó la ponencia "Prevención Combinada del VIH - Herramientas para el primer nivel de atención" en el XXXVI Congreso Nacional de Medicina Familiar en Puebla, promoviendo la integración de pruebas rápidas de VIH, sífilis y hepatitis C en consultorios de primer nivel para garantizar una atención accesible, empática y libre de estigmas.
 date: Jun 12 2026
 pubDate: Jun 12 2026
 ---
