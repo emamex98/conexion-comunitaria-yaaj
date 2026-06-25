@@ -16,16 +16,6 @@ const cleanTitle = rawTitle
 <!doctype html>
 <html lang="es">
   <head>
-    <script>
-      const urlParams = new URLSearchParams(window.location.search);
-      const preview = Boolean(urlParams.get("preview"));
-      const now = new Date();
-      const launchDate = new Date("2026-06-25T17:00:00.000Z");
-      if (now < launchDate && !preview) {
-        window.location.href = "https://soon-conexioncomunitaria.vercel.app/";
-      }
-    </script>
-
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
